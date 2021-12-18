@@ -134,4 +134,29 @@ class UserController extends Controller
              return redirect()->route('users.index')
             ->with('success', 'Berhasil menghapus user');
     }
+
+    public function profileUpdate(Request $request)
+    {
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed',
+            'image_profile' =>'file|image|mimes:jpeg,jpg,png|max:5120'
+        ]);
+        $request->file('image_profile') ? $img = $request->file('image_profile')->store('profile-image') : $img=Auth::user()->image_profile;
+        $password = bcrypt($validate['password']);
+        $id = Auth::user()->id;
+        $user = User::find($id);
+
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=$password;
+        $user->image_profile=$img;
+
+        $user->save();
+        return redirect()->route('profile')
+        ->with('success', 'Berhasil mengupate profile');
+
+
+    }
 }

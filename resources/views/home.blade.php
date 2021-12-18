@@ -11,7 +11,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-
                     <div class="container px-lg-5">
                         <div class="row mx-lg-n5">
                           <div class="col py-3 px-lg-5 border bg-light"><div id="container"></div></div>

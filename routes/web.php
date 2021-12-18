@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\StoryController;
+use App\Models\Story;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,14 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $artikel=Story::all();
+    $newA=Story::skip(0)->take(3)->orderby('id_story','Asc')->get();
+    $penulis = User::where('role', 'penulis')->get();
+    return view('welcome',compact('artikel','newA','penulis'));
 });
 
+
+Route::get('bacaartikel/{id}',[StoryController::class,'bacaartikel'])->name('bacaartikel');
 Auth::routes();
 
 
@@ -42,6 +49,7 @@ Auth::routes();
             Route::delete('/userdelete/{id}', [UserController::class, 'destroy'])->name('deleteuser');
             Route::resource('stories', \App\Http\Controllers\StoryController::class);
             Route::get('profile',[AdminController::class, 'profile'])->name('profile');
+            Route::put('/updateprofile', [UserController::class, 'profileUpdate'])->name('updateprofile');
         });
 
         Route::middleware(['penulis'])->group(function () {

@@ -35,7 +35,10 @@
                                 <a class="nav-link fw-normal text-white" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link fw-normal text-white" href="#">Stories</a>
+                                <a class="nav-link fw-normal text-white" {{ Request::is('/') ? 'href=#koleksi' : 'href=/' }}>Stories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fw-normal text-white" {{ Request::is('/') ? 'href=#author' : 'href=/' }}>Author Artikel</a>
                             </li>
                         </ul>
                         <form class="d-flex">

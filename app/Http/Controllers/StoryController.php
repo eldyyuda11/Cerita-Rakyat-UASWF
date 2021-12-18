@@ -85,4 +85,9 @@ class StoryController extends Controller
              return redirect()->route('stories.index')
             ->with('success', 'Berhasil menghapus user');
     }
+    public function bacaartikel(Request $request, $id){
+        $artikel = Story::find($id)->get();
+
+        return view('artikel', compact('artikel'));
+    }
 }
