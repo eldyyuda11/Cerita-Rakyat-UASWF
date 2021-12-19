@@ -40,7 +40,7 @@
                             <tr>
                                 <td>{{++$key}}</td>
                                 <td>{{$user->name}}</td>
-                                <td> <img src="{{asset('storage/'. $user->image_profile)}}" alt="" width="100cm" height="100cm">
+                                <td> <img src="{{asset('storage/'.$user->image_profile)}}" alt="" width="100cm" height="100cm">
                                     </td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->role}}</td>

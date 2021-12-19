@@ -23,10 +23,10 @@
          <section class="container mt-5" id="news">
             <h2 class="fw-bold text-center" id="koleksi">Koleksi Cerita Rakyat</h2>
             <div class="row mt-3 g-5">
+                @foreach ($artikel as $item)
                 <div class="col-lg-4 col-md-4 col-sm-12 d-flex justify-content-center">
-                    @foreach ($artikel as $item)
                     <div class="card" style="width: 18rem;">
-                        <img class="m-2" src="{{asset('storage/profile-image/'. $item->image_path)}}" class="card-img-top" alt="..." width="100" height="50">
+                        <img class="m-4 justify-content-center" src="{{asset('storage/'. $item->image_path)}}" class="card-img-top" alt="..." width="100" height="50">
                         <div class="card-body m-0">
                             <h5 class="card-title fw-bold text-center">{{$item->judul}}</h5>
                             <p class="card-text">
@@ -35,10 +35,9 @@
                                 <a href="{{Url('bacaartikel/'.$item->id_story)}}" class="btn btn-outline-warning">Read More</a>
                             </div>
                         </div>
-                        @endforeach
+                    </div>
+                    @endforeach
                 </div>
-
-            </div>
             <hr>
         </section>
 

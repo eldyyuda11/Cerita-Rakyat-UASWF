@@ -21,7 +21,7 @@
     <header class="header-section pt-3 pb-5">
         <!-- Navigation Bar -->
         <section>
-            <nav class="navbar navbar-expand-lg navbar-light">
+            <nav class="navbar navbar-expand-lg navbar-light sticky-top">
                 <div class="container">
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

@@ -83,11 +83,10 @@ class StoryController extends Controller
         $story = Story::find($id);
         $story->delete();
              return redirect()->route('stories.index')
-            ->with('success', 'Berhasil menghapus user');
+            ->with('success', 'Berhasil menghapus artikel');
     }
     public function bacaartikel(Request $request, $id){
-        $artikel = Story::find($id)->get();
-
+        $artikel = Story::find($id);
         return view('artikel', compact('artikel'));
     }
 }

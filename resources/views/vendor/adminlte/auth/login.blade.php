@@ -63,6 +63,7 @@
                     <input type="checkbox" name="remember" id="remember">
                     <label for="remember">{{ __('adminlte::adminlte.remember_me') }}</label>
                 </div>
+
             </div>
             <div class="col-5">
                 <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
@@ -73,9 +74,13 @@
         </div>
 
     </form>
-@stop
+    @stop
 
-@section('auth_footer')
+    @section('auth_footer')
+    <p class="my-0">
+        <a href="{{ url('/')}}">
+            <b> Halaman Cerita</b></a>
+    </p>
     {{-- Password reset link --}}
     @if($password_reset_url)
         <p class="my-0">

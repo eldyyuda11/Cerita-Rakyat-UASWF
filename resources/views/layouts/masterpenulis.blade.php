@@ -1,3 +1,4 @@
+@extends('adminlte::master')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,13 +13,17 @@
       crossorigin="anonymous"
     />
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  @section('adminlte_css')
+    @stack('css')
+    @yield('css')
+@stop
 </head>
 <body>
 
   <!-- navbar start -->
-  <nav class="navbar navbar-expand-lg navbar-light top-nav shadow-sm bg-white rounded sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-light top-nav shadow-sm bg-dark sticky-top ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Cerita rakyat</a>
+      <a class="navbar-brand text-white" href="/">Cerita rakyat</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -57,21 +62,20 @@
                 aria-expanded="false"
                 style="display: flex; align-items: center;"
               >
-                <i class="material-icons icon">
+                <i class="material-icons icon text-white">
                   person
                 </i>
-                <span class="text">Account</span>
+                <span class="text-white">{{Auth::user()->name}}</span>
               </a>
               <div
                 class="dropdown-menu dropdown-menu-right"
                 aria-labelledby="navbarDropdown">
-                <form action="{{route('logoutpenulis')}}" method="post">
+                <a href="{{route('logoutpenulis')}}" class="btn btn-dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+                <form id="logout-form" action="{{route('logoutpenulis')}}" method="post" style="display: none;">
                     @csrf
-                    <button type="submit" class="btn btn-dropdown-item">Log Out</button>
                 </form>
 
                 <div class="dropdown-divider"></div>
-
               </div>
             </li>
           </ul>
@@ -82,147 +86,50 @@
   <!-- navbar end -->
   <!-- vertical navbar start -->
 
-  <div class="wrapper d-flex shadow-sm bg-white rounded">
-    <div class="sideMenu shadow-sm">
-      <div class="sidebar">
+  <div class="wrapper d-flex shadow-sm bg-dark">
+    <div class="sideMenu shadow-sm" style="height:100%">
+      <div class="sidebar" style="height:100%">
         <ul class="navbar-nav side-nav">
           <li class="nav-item mb-1 p-4 shadow-sm rounded">
             <div class="btn-group dropright">
               <button type="button" class="btn">
-                <a href="#" class="nav-link px-2">
-                  <i class="material-icons icon">
+                <a href="home" class="nav-link px-2 {{Request::is('homepenulis') ? 'active' : ''}}">
+                  <i class="material-icons icon text-white">
                     dashboard
                   </i>
-                  <span class="text">Dashboard</span>
+                  <span class="text-white">Dashboard</span>
                 </a>
-              </button>
-              <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
+               </button>
             </div>
           </li>
 
           <li class="nav-item mb-1 p-4 shadow-sm rounded">
             <div class="btn-group dropright">
               <button type="button" class="btn">
-                <a href="#" class="nav-link px-2">
-                  <i class="material-icons icon">
+                <a href="{{route('artikel.index')}}" class="nav-link px-2">
+                  <i class="material-icons icon text-white">
                     book
                   </i>
-                  <span class="text">Accounting Voucher</span>
+                  <span class="text-white">Artikel</span>
                 </a>
               </button>
-              <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
             </div>
           </li>
 
           <li class="nav-item mb-1 p-4 shadow-sm rounded">
             <div class="btn-group dropright">
               <button type="button" class="btn">
-                <a href="#" class="nav-link px-2">
-                  <i class="material-icons icon">
-                    dns
+                <a href="{{route('profilepenulis')}}" class="nav-link px-2 {{Request::is('profilepenulis') ? 'active' : ''}}">
+                  <i class="material-icons icon text-white">
+                    person
                   </i>
-                  <span class="text">Inventory</span>
+                  <span class="text-white">Profile</span>
                 </a>
-              </button>
-              <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
+               </button>
             </div>
           </li>
 
-          <li class="nav-item mb-1 p-4 shadow-sm rounded">
-            <div class="btn-group dropright">
-              <button type="button" class="btn">
-                <a href="#" class="nav-link px-2">
-                  <i class="material-icons icon">
-                    pages
-                  </i>
-                  <span class="text">Other Reports</span>
-                </a>
-              </button>
-              <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
-            </div>
-          </li>
 
-          <li class="nav-item mb-1 p-4 shadow-sm rounded">
-            <div class="btn-group dropright">
-              <button type="button" class="btn">
-                <a href="#" class="nav-link px-2">
-                  <i class="material-icons icon">
-                    computer
-                  </i>
-                  <span class="text">GST Reports</span>
-                </a>
-              </button>
-              <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="nav-item mb-1 p-4 shadow-sm rounded">
-            <div class="btn-group dropright">
-              <button type="button" class="btn">
-                <a href="#" class="nav-link px-2">
-                  <i class="material-icons icon">
-                    view_list
-                  </i>
-                  <span class="text">Others</span>
-                </a>
-              </button>
-              <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
-            </div>
-          </li>
 
         </ul>
       </div>
@@ -240,6 +147,9 @@
       crossorigin="anonymous">
     </script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+   @section('adminlte_js')
+   @stack('js')
+   @yield('js')
+@stop
   </body>
 </html>

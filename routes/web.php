@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StoryController;
+use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\PenulisController;
 use App\Models\Story;
 use App\Models\User;
 
@@ -51,14 +53,19 @@ Auth::routes();
             Route::get('profile',[AdminController::class, 'profile'])->name('profile');
             Route::put('/updateprofile', [UserController::class, 'profileUpdate'])->name('updateprofile');
         });
-
         Route::middleware(['penulis'])->group(function () {
              Route::resource('homepenulis', \App\Http\Controllers\PenulisController::class);
-
+             Route::resource('artikel',\App\Http\Controllers\ArtikelController::class);
+             Route::put('updateartikel', [ArtikelController::class, 'update'])->name('updateartikel');
+             Route::get('editartikel/{id}',[ArtikelController::class, 'showartikel'])->name('editartikel');
+            Route::get('profilepenulis', [PenulisController::class, 'profile'])->name('profilepenulis');
+            Route::put('updateprofilepenulis', [PenulisController::class, 'profileUpdate'])->name('updateprofilepenulis');
         });
 
+    Route::get('logout', function () {
+        Auth::logout();
+        return redirect('login');
 
-
-
+    });
 
 });
