@@ -34,7 +34,7 @@ php artisan migrate
 ```
 5.run seeder
 ```bash
-php artisan db:seeder
+php artisan db:seed
 ```
 
 ## Username and Password for login Admin
