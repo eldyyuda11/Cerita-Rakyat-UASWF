@@ -89,7 +89,6 @@ class ArtikelController extends Controller
         ]);
         $story = Story::find($request->id_story);
         $request->file('image_path') ?  $img = $request->file('image_path')->store('ilustrasi-image') : $img = $story->image_path;
-        dd($img);
         $story->judul = $request->judul;
         $story->isi = $request->isi;
         $story->user_id = $request->user_id;

@@ -20,10 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    {{-- <a class="btn btn-primary mb-2" data-bs-toggle="modal" href="#store-modal" role="button">Tambah Data User</a> --}}
-                    {{-- <a href="{{route('users.create')}}" class="btn btn-primary mb-2">
-                        Tambah
-                    </a> --}}
+
                     <table class="table table-hover table-bordered table-stripped" id="example2">
                         <thead>
                         <tr>

@@ -48,20 +48,20 @@
         <Section class="container mt-5">
             <h2 class="fw-bold text-center" id="author">Author <span class="dark-orange">Article</span></h2>
             <div class="row g-4 mt-4">
+                @foreach ($penulis as $item)
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    @foreach ($penulis as $item)
 
                     <div class="card  h-80 border-0 shadow-lg">
                         <div class="card-body">
                             <h3 class="card-title" style="text-align:center;">{{$item->name}}</h3>
 
                             <div class="card-text">
-                                <p>{{ Str::limit($item->email, 100) }}</p>
+                                <p>{{$item->email }}</p>
                             </div>
                         </div>
                     </div>
-                    @endforeach
                 </div>
+                @endforeach
 
 
             </div>
